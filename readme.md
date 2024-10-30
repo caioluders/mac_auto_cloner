@@ -39,7 +39,6 @@ Required packages:
 #### macOS
 - Must be run as root (sudo)
 - For Wi-Fi interfaces:
-  - `spoof-mac` recommended: `brew install spoof-mac`
   - May require SIP (System Integrity Protection) to be disabled
   - Some Apple Silicon Macs may have additional restrictions
 
@@ -60,26 +59,77 @@ cd mac-changer
 pip install -r requirements.txt
 ```
 
-3. For macOS users (recommended):
-```bash
-brew install spoof-mac
-```
-
 ## Usage
 
 ### Interactive Mode
 Simply run the script without arguments:
 ```bash
 # Linux/macOS
-sudo python3 macchanger.py
+sudo python3 mac_auto_cloner.py
 
 # Windows (as Administrator)
-python macchanger.py
+python mac_auto_cloner.py
+```
+
+#### Interactive Mode Example
+
+Here's a complete walkthrough of the interactive mode:
+
+```bash
+$ sudo python3 mac_auto_cloner.py
+
+=== MAC Address Changer ===
+
+Available interfaces:
+1. wlan0          MAC: 00:11:22:33:44:55  IP: 192.168.1.10
+2. eth0           MAC: AA:BB:CC:DD:EE:FF  IP: 192.168.1.11
+3. en0            MAC: 11:22:33:44:55:66  IP: 192.168.1.12
+
+Select interface number: 1
+
+Scanning network 192.168.1.0/24...
+
+Detected devices:
+1. IP: 192.168.1.1     MAC: 00:11:22:33:44:55    (Router)
+2. IP: 192.168.1.100   MAC: AA:BB:CC:DD:EE:FF    (Desktop)
+3. IP: 192.168.1.101   MAC: 11:22:33:44:55:66    (Laptop)
+4. IP: 192.168.1.102   MAC: 66:77:88:99:AA:BB    (Phone)
+5. Use random MAC
+6. Enter MAC manually
+
+Select device number to clone MAC or other option: 2
+
+Changing MAC address for wlan0 (Wi-Fi)...
+Turning off Wi-Fi...
+Setting MAC address to AA:BB:CC:DD:EE:FF...
+Enabling interface...
+
+Successfully changed MAC address of wlan0 to AA:BB:CC:DD:EE:FF
+```
+
+In this example:
+1. The tool first lists all available network interfaces
+2. After selecting an interface, it scans the network and displays discovered devices
+3. You can choose to:
+   - Clone a MAC address from a discovered device (options 1-4)
+   - Generate a random MAC address (option 5)
+   - Enter a custom MAC address (option 6)
+4. The tool then changes the MAC address and verifies the change
+
+Note: If no devices are found during scanning, you'll see this alternative menu:
+```bash
+No devices found on the network.
+Would you like to:
+1. Use a random MAC address
+2. Enter a MAC address manually
+3. Exit
+
+Enter your choice:
 ```
 
 ### Command Line Options
 ```bash
-usage: python3 macchanger.py [-h] [-i INTERFACE] [-m MAC] [-r] [-s] [-c CLONE]
+usage: python3 mac_auto_cloner.py [-h] [-i INTERFACE] [-m MAC] [-r] [-s] [-c CLONE]
 
 options:
   -h, --help            Show this help message
@@ -94,27 +144,27 @@ options:
 
 1. List available interfaces and scan network (Interactive Mode):
 ```bash
-sudo python3 macchanger.py
+sudo python3 mac_auto_cloner.py
 ```
 
 2. Change to a specific MAC address:
 ```bash
-sudo python3 macchanger.py -i eth0 -m 00:11:22:33:44:55
+sudo python3 mac_auto_cloner.py -i eth0 -m 00:11:22:33:44:55
 ```
 
 3. Set random MAC address:
 ```bash
-sudo python3 macchanger.py -i eth0 -r
+sudo python3 mac_auto_cloner.py -i eth0 -r
 ```
 
 4. Scan network for devices:
 ```bash
-sudo python3 macchanger.py -i eth0 -s
+sudo python3 mac_auto_cloner.py -i eth0 -s
 ```
 
 5. Clone MAC address from device:
 ```bash
-sudo python3 macchanger.py -i eth0 -c 192.168.1.100
+sudo python3 mac_auto_cloner.py -i eth0 -c 192.168.1.100
 ```
 
 ## Troubleshooting
