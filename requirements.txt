@@ -1,0 +1,6 @@
+scapy>=2.5.0
+argparse>=1.4.0
+dataclasses>=0.6; python_version < "3.7"
+typing>=3.7.4; python_version < "3.5"
+netifaces>=0.11.0  # For better network interface handling
+mac-vendor-lookup>=0.1.12  # Optional: for MAC vendor lookups
