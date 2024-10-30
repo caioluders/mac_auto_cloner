@@ -2,6 +2,8 @@
 
 A cross-platform Python tool for changing MAC addresses, scanning network devices, and cloning MAC addresses from discovered devices. Supports Linux, macOS, and Windows with enhanced features for network discovery.
 
+Inspired by : https://github.com/StellarSand/universal-macchanger
+
 ## Features
 
 - 🔄 MAC address modification
